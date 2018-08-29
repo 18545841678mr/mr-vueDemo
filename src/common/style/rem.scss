@@ -1,0 +1,5 @@
+@import 'variable';
+
+@function rem($target) {
+    @return ($target / $html_fontsize) * 1rem;
+}
