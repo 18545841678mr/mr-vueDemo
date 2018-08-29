@@ -1,6 +1,14 @@
 <template>
     <div class="haowen">
-        <div class="head">好文在线</div>
+        <div class="title">好文在线</div>
+        <div class="search">
+
+        </div>
+        <div class="head-swiper"></div>
+        <div class="hot-art" v-for="(item, index) in hotList" :key="index">
+            <p class="hotTitle">{{item.title}}</p>
+            
+        </div>
     </div>
 </template>
 <script>
@@ -20,6 +28,6 @@ export default {
 @import '../../../style/normalize.scss';
 
 .haowen {
-    
+
 }
 </style>
