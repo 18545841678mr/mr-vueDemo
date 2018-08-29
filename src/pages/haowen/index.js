@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueScroller from 'vue-scroller'
 import VConsole from 'vconsole'
 import vuex from 'vuex'
-import router from '@/router/haowen'
+import router from '@/router'
 import Index from './haowen.vue'
 
 
