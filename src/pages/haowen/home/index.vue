@@ -7,7 +7,7 @@
         <div class="head-swiper"></div>
         <div class="hot-art" v-for="(item, index) in hotList" :key="index">
             <p class="hotTitle">{{item.title}}</p>
-            
+
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     name: 'home',
     data(){
         return{
-
+            hotList: []
         }
     }
 }
