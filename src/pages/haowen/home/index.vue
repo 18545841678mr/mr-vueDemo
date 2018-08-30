@@ -4,19 +4,77 @@
         <div class="search">
 
         </div>
-        <div class="head-swiper"></div>
-        <div class="hot-art" v-for="(item, index) in hotList" :key="index">
-            <p class="hotTitle">{{item.title}}</p>
+        <div class="head-swiper">
+            <swiper :options="swiperOption" ref="mySwiper">
+                <swiper-slide>I'm Slide 1</swiper-slide>
+                <swiper-slide>I'm Slide 2</swiper-slide>
+                <swiper-slide>I'm Slide 3</swiper-slide>
 
+                <div class="swiper-pagination"  slot="pagination"></div>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+                <div class="swiper-scrollbar"   slot="scrollbar"></div>
+            </swiper>
+        </div>
+        <div class="hotList">
+            <div class="hot-art" v-for="(item, index) in hotList" :key="index">
+                <p class="hotTitle">{{ item.title }}</p>
+                <span class="hot">热</span>
+                <span class="read">{{ item.readNum }}阅读</span>
+                <span class="time">{{item.date}}</span>
+            </div>
+        </div>
+        <div class="articleList">
+            <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="showDetail">
+                <div class="titleBar">
+                    <p class="hotTitle">{{ item.title }}</p>
+                    <span class="read">{{ item.readNum }}阅读</span>
+                    <span class="time">{{ item.date }}</span>
+                </div>
+                <div class="pic">
+                    <img src="{{item.img}}" alt="">
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
 export default {
     name: 'home',
     data(){
         return{
-            hotList: []
+            hotList: [], //热门文章列表数组
+            artiList: [], //文章列表数组
+            swiperOption: {//swiper官网api，链接http://www.swiper.com.cn/api/
+                // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+                notNextTick: true,
+                // swiper configs 所有的配置同swiper官方api配置
+                autoplay: 6000,
+                direction : 'vertical',
+                grabCursor : true,
+                setWrapperSize :true,
+                autoHeight: true,
+                pagination : '.swiper-pagination',
+                paginationClickable :true,
+                prevButton:'.swiper-button-prev',//上一张
+                nextButton:'.swiper-button-next',//下一张
+                scrollbar:'.swiper-scrollbar',//滚动条
+                mousewheelControl : true,
+                observeParents:true,
+                // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
+                debugger: true,
+            }
+        }
+    },
+    components: {
+        swiper, 
+        swiperSlide,
+    },
+    methods: {
+        showDetail(){
+            console.log('show detail!');
         }
     }
 }
