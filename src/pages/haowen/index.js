@@ -8,6 +8,7 @@ import Index from './haowen.vue'
 
 const vConsole = new VConsole()
 Vue.use(VueScroller)
+Vue.use(VueAwesomeSwiper)
 
 console.log(vConsole.version)
 
