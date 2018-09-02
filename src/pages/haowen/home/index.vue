@@ -4,12 +4,17 @@
         <div class="search">
 
         </div>
-        <div class="head-swiper">
-            <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
+        <div class="swiperList">
+            <div class="head-swiper">
+                <swiper :options="swiperOption" ref="mySwiper">
+                    <swiper-slide  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
 
-                </swiper-slide>
-            </swiper>
+                    </swiper-slide>
+                </swiper>
+            </div>
+            <div class="pagination">
+                <span v-for="(v,i) in authInfo.imgList" :key="i" :class="{'active': activeIndex == i}"></span>
+            </div>
         </div>
         <div class="hotList">
             <div class="hot-art" v-for="(item, index) in hotList" :key="index" @click="goDetail(item.id)">
@@ -51,22 +56,14 @@ export default {
             swiperOption: {//swiper官网api，链接http://www.swiper.com.cn/api/
                 // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
                 notNextTick: true,
-                // swiper configs 所有的配置同swiper官方api配置
+                noSwiping : true,
                 autoplay: 6000,
-                direction : 'vertical',
-                grabCursor : true,
-                setWrapperSize :true,
-                autoHeight: true,
-                pagination : '.swiper-pagination',
-                paginationClickable :true,
-                prevButton:'.swiper-button-prev',//上一张
-                nextButton:'.swiper-button-next',//下一张
-                scrollbar:'.swiper-scrollbar',//滚动条
-                mousewheelControl : true,
-                observeParents:true,
-                // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-                // debugger: true,
-            }
+                speed: 800,
+                onTransitionStart: swiper => {
+                    this.activeIndex = swiper.activeIndex;
+                },
+            },
+            activeIndex: 0
         }
     },
     components: {
@@ -130,6 +127,24 @@ export default {
             height: 100%;
             background: url(../../../assets/haowen/WechatIMG15.png) no-repeat left center;
             background-size: rem(18) auto;
+        }
+    }
+    .pagination {
+        padding-top: rem(22);
+        padding-bottom: rem(28);
+        text-align: center;
+        font-size:0;
+        span {
+            width: rem(15);
+            height: rem(3);
+            display: inline-block;
+            vertical-align: middle;
+            background: #E0E0E0;
+            margin-right: rem(10);
+            border-radius: 3px;
+            &.active {
+                background: #FFDC00;
+            }
         }
     }
     .hotList{
