@@ -13,7 +13,7 @@
                 </swiper>
             </div>
             <div class="pagination">
-                <span v-for="(v,i) in authInfo.imgList" :key="i" :class="{'active': activeIndex == i}"></span>
+                <span v-for="(v,i) in swiperList.imgList" :key="i" :class="{'active': activeIndex == i}"></span>
             </div>
         </div>
         <div class="hotList">
