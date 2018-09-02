@@ -6,14 +6,9 @@
         </div>
         <div class="head-swiper">
             <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
+                <swiper-slide  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
 
-                <div class="swiper-pagination"  slot="pagination"></div>
-                <div class="swiper-button-prev" slot="button-prev"></div>
-                <div class="swiper-button-next" slot="button-next"></div>
-                <div class="swiper-scrollbar"   slot="scrollbar"></div>
+                </swiper-slide>
             </swiper>
         </div>
         <div class="hotList">
@@ -44,7 +39,7 @@
 </template>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
-import axios from 'axios';
+import API from "@/service";
 
 export default {
     name: 'home',
@@ -83,7 +78,7 @@ export default {
             this.$router.push(`detail?id=${id}`);
         },
         getList(){
-            axios.post('', {})
+            API.getList({})
             .then(function(res) {
                 for(let i = 0; i < res.data.length; i++) {
                     if(res.data[i].is_hot == 1 && res.data[i].is_home_show == 1){

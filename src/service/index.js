@@ -8,6 +8,10 @@ const API = {
         console.log('入参', params)
         return axios.post(URL.articleDetail, params);
     },
+    getList(params) {
+        console.log('入参', params);
+        return axios.post(URL.articleList, params)
+    }
 }
 
 export default API;
