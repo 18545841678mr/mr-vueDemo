@@ -1,6 +1,7 @@
 <template>
     <div class='article'>
-        <article>
+        <span v-if='loading'>加载中···</span>
+        <article v-else>
             <header>
                 <h2 class="title">
                     {{showTitle}}
@@ -22,9 +23,11 @@
     </div>
 </template>
 <script>
+import API from "@/service";
 export default {
     data() {
         return {
+            loading: true,
             showAll: false,
             title: '蒲公英叶子的功效与作用蒲公英叶子的功效与作用蒲公英叶子的功效与作用蒲公英叶子的功效与作用蒲公英叶子的功效与作用蒲公英叶子的功效与作用',
             content: '截至目前，已经有200多家科技公司成为Triplebyte的客户，包括业界第一的苹果，老牌的云端服务Dropbox，以及Stripe、Quora、Reddit、KhanAcademy、Opendoor等一大票科技界的明星公司。最近，Triplebyte发现求职的软件工程师在与公司的薪酬谈判中总是处于弱势地位，他们认为这是不公平的于是，Triplebyte利用自身的平台，统计了硅谷众多科技公司对于软件工程师的年薪酬水平，以此新入行的人们提供一个参考。需要注意的是，Triplebyte统计的只是公司给出的底薪。一般公司还提供股权，年度奖金或者其他福利，这通常占总工资的很大一部分。但Triplebyte认为这些非薪资组成部分在单一的数轴上进行比较是不合理的，所以只有一个底薪的统计。',
@@ -42,6 +45,11 @@ export default {
         slide() {
             this.showAll = true;
         }
+    },
+    mounted() {
+        API.getArticle({
+            id: 1
+        });
     }
 }
 </script>
