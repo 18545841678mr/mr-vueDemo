@@ -6,9 +6,9 @@
         </div>
         <div class="head-swiper">
             <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide>I'm Slide 1</swiper-slide>
-                <swiper-slide>I'm Slide 2</swiper-slide>
-                <swiper-slide>I'm Slide 3</swiper-slide>
+                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>
+                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
+                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
 
                 <div class="swiper-pagination"  slot="pagination"></div>
                 <div class="swiper-button-prev" slot="button-prev"></div>
@@ -17,26 +17,26 @@
             </swiper>
         </div>
         <div class="hotList">
-            <div class="hot-art" v-for="(item, index) in hotList" :key="index">
+            <div class="hot-art" v-for="(item, index) in hotList" :key="index" @click="goDetail(item.id)">
                 <p class="hotTitle">{{ item.title }}</p>
                 <div class="info">
                     <span class="hot">热</span>
-                    <span class="read">{{ item.readNum }}阅读</span>
-                    <span class="time">{{ item.date }}</span>
+                    <span class="read">{{ item.read_count }}阅读</span>
+                    <span class="time">{{ item.public_time }}</span>
                 </div>
             </div>
         </div>
         <div class="articleList">
-            <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="showDetail">
+            <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="goDetail(item.id)">
                 <div class="titleBar">
                     <p class="artiTitle">{{ item.title }}</p>
                     <div class="info">
-                        <span class="read">{{ item.readNum }}阅读</span>
-                        <span class="time">{{ item.date }}</span>
+                        <span class="read">{{ item.read_count }}阅读</span>
+                        <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
                 <div class="pic">
-                    <img :src="item.img" alt="">
+                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
                 </div>
             </div>
         </div>
@@ -49,15 +49,8 @@ export default {
     name: 'home',
     data(){
         return{
-            hotList: [
-                {title:'洗脸的误区都有哪些 这些错误你至今还在犯吗', readNum: '4.5w', date: '2018-06'},
-                {title:'洗脸的误区都有哪些 这些错误你至今还在犯吗', readNum: '4.5w', date: '2018-06'}
-            ], //热门文章列表数组
-            artiList: [
-                {title:'洗脸的误区都有哪些 这些错误你至今还在犯吗', readNum: '4.5w', date: '2018-06', img:'http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg'},
-                {title:'洗脸的误区都有哪些 这些错误你至今还在犯吗', readNum: '4.5w', date: '2018-06', img:'http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg'},
-                {title:'洗脸的误区都有哪些 这些错误你至今还在犯吗', readNum: '4.5w', date: '2018-06', img:'http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg'}
-            ], //文章列表数组
+            hotList: [], //热门文章列表数组
+            artiList: [], //文章列表数组
             swiperOption: {//swiper官网api，链接http://www.swiper.com.cn/api/
                 // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
                 notNextTick: true,
@@ -75,7 +68,7 @@ export default {
                 mousewheelControl : true,
                 observeParents:true,
                 // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-                debugger: true,
+                // debugger: true,
             }
         }
     },
@@ -84,9 +77,12 @@ export default {
         swiperSlide,
     },
     methods: {
-        showDetail(){
-            console.log('show detail!');
+        goDetail(id){
+            this.$router.push(`detail?id=${id}`);
         }
+    },
+    mounted(){
+        
     }
 }
 </script>
