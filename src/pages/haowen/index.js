@@ -4,6 +4,7 @@ import VConsole from 'vconsole'
 import vuex from 'vuex'
 import router from '@/router'
 import Index from './haowen.vue'
+import axios from 'axios';
 
 
 const vConsole = new VConsole()
