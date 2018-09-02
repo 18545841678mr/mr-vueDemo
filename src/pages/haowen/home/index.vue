@@ -43,12 +43,14 @@
     </div>
 </template>
 <script>
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { swiper, swiperSlide } from 'vue-awesome-swiper';
+import axios from 'axios';
 
 export default {
     name: 'home',
     data(){
         return{
+            swiperList: [], //轮播文章数组
             hotList: [], //热门文章列表数组
             artiList: [], //文章列表数组
             swiperOption: {//swiper官网api，链接http://www.swiper.com.cn/api/
@@ -79,10 +81,29 @@ export default {
     methods: {
         goDetail(id){
             this.$router.push(`detail?id=${id}`);
+        },
+        getList(){
+            axios.post('', {})
+            .then(function(res) {
+                for(let i = 0; i < res.data.length; i++) {
+                    if(res.data[i].is_hot == 1 && res.data[i].is_home_show == 1){
+                        this.swiperList.push(res.data[i]);
+                    }else if(res.data[i].is_hot == 1) {
+                        this.hotList.push(res.data[i]);
+                    }else if(res.data[i].is_home_show == 1) {
+                        this.swiperList.push(res.data[i]);
+                    }else {
+                        this.artiList.push(res.data[i]);
+                    }
+                }
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
         }
     },
     mounted(){
-        
+        this.getList();
     }
 }
 </script>
