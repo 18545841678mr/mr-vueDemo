@@ -4,24 +4,24 @@
         <div class="search">
 
         </div>
-        <div class="head-swiper">
-            <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
-                <swiper-slide><img src="http://imgsrc.baidu.com/baike/pic/item/00e93901213fb80e6fd10aa73ad12f2eb93894b9.jpg" alt=""></swiper-slide>                
-
-                <div class="swiper-pagination"  slot="pagination"></div>
-                <div class="swiper-button-prev" slot="button-prev"></div>
-                <div class="swiper-button-next" slot="button-next"></div>
-                <div class="swiper-scrollbar"   slot="scrollbar"></div>
-            </swiper>
+        <div class="swiperList">
+            <div class="head-swiper">
+                <swiper :options="swiperOption" ref="mySwiper">
+                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
+                        <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" >
+                    </swiper-slide>
+                </swiper>
+            </div>
+            <div class="pagination">
+                <span v-for="(v,i) in swiperList.imgList" :key="i" :class="{'active': activeIndex == i}"></span>
+            </div>
         </div>
         <div class="hotList">
             <div class="hot-art" v-for="(item, index) in hotList" :key="index" @click="goDetail(item.id)">
                 <p class="hotTitle">{{ item.title }}</p>
                 <div class="info">
                     <span class="hot">热</span>
-                    <span class="read">{{ item.read_count }}阅读</span>
+                    <span class="read">{{ item.read_count }}w阅读</span>
                     <span class="time">{{ item.public_time }}</span>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="titleBar">
                     <p class="artiTitle">{{ item.title }}</p>
                     <div class="info">
-                        <span class="read">{{ item.read_count }}阅读</span>
+                        <span class="read">{{ item.read_count }}w阅读</span>
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
 </template>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
-import axios from 'axios';
+import API from "@/service";
 
 export default {
     name: 'home',
@@ -56,22 +56,14 @@ export default {
             swiperOption: {//swiper官网api，链接http://www.swiper.com.cn/api/
                 // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
                 notNextTick: true,
-                // swiper configs 所有的配置同swiper官方api配置
+                noSwiping : true,
                 autoplay: 6000,
-                direction : 'vertical',
-                grabCursor : true,
-                setWrapperSize :true,
-                autoHeight: true,
-                pagination : '.swiper-pagination',
-                paginationClickable :true,
-                prevButton:'.swiper-button-prev',//上一张
-                nextButton:'.swiper-button-next',//下一张
-                scrollbar:'.swiper-scrollbar',//滚动条
-                mousewheelControl : true,
-                observeParents:true,
-                // 如果自行设计了插件，那么插件的一些配置相关参数，也应该出现在这个对象中，如下debugger
-                // debugger: true,
-            }
+                speed: 800,
+                onTransitionStart: swiper => {
+                    this.activeIndex = swiper.activeIndex;
+                },
+            },
+            activeIndex: 0
         }
     },
     components: {
@@ -83,17 +75,19 @@ export default {
             this.$router.push(`detail?id=${id}`);
         },
         getList(){
-            axios.post('', {})
+            let _this = this;
+            API.getList({})
             .then(function(res) {
-                for(let i = 0; i < res.data.length; i++) {
-                    if(res.data[i].is_hot == 1 && res.data[i].is_home_show == 1){
-                        this.swiperList.push(res.data[i]);
-                    }else if(res.data[i].is_hot == 1) {
-                        this.hotList.push(res.data[i]);
-                    }else if(res.data[i].is_home_show == 1) {
-                        this.swiperList.push(res.data[i]);
+                console.log(res.data.data.data);
+                for(let i = 0; i < res.data.data.data.length; i++) {
+                    if(res.data.data.data[i].is_hot == 1 && res.data.data.data[i].is_home_show == 1){
+                        _this.swiperList.push(res.data.data.data[i]);
+                    }else if(res.data.data.data[i].is_hot == 1) {
+                        _this.hotList.push(res.data.data.data[i]);
+                    }else if(res.data.data.data[i].is_home_show == 1) {
+                        _this.swiperList.push(res.data.data.data[i]);
                     }else {
-                        this.artiList.push(res.data[i]);
+                        _this.artiList.push(res.data.data.data[i]);
                     }
                 }
             })
@@ -137,6 +131,36 @@ export default {
             background-size: rem(18) auto;
         }
     }
+    .swiperList {
+        .head-swiper{
+            .swiperSlide{
+                margin: rem(5) auto;
+                position: relative;
+                img{
+                    width: rem(332);
+                    height: rem(166);
+                }
+            }
+        }
+    }
+    .pagination {
+        padding-top: rem(22);
+        padding-bottom: rem(28);
+        text-align: center;
+        font-size:0;
+        span {
+            width: rem(15);
+            height: rem(3);
+            display: inline-block;
+            vertical-align: middle;
+            background: #E0E0E0;
+            margin-right: rem(10);
+            border-radius: 3px;
+            &.active {
+                background: #FFDC00;
+            }
+        }
+    }
     .hotList{
         padding: rem(15);
         .hot-art {
@@ -149,7 +173,7 @@ export default {
                 text-align: start;
             }
             .info{
-                width: rem(160); 
+                width: rem(190); 
                 margin-top: rem(8);
                 .hot{
                     display: inline-block;
@@ -188,8 +212,8 @@ export default {
                     text-align: start;
                 }
                 .info{
-                width: rem(130); 
-                margin-top: rem(8);
+                    width: rem(160); 
+                    margin-top: rem(8);
                     .read{
                         color: #8F8F8F;
                         font-size: rem(14);
