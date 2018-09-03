@@ -7,8 +7,8 @@
         <div class="swiperList">
             <div class="head-swiper">
                 <swiper :options="swiperOption" ref="mySwiper">
-                    <swiper-slide  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
-
+                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
+                        <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" >
                     </swiper-slide>
                 </swiper>
             </div>
@@ -21,7 +21,7 @@
                 <p class="hotTitle">{{ item.title }}</p>
                 <div class="info">
                     <span class="hot">热</span>
-                    <span class="read">{{ item.read_count }}阅读</span>
+                    <span class="read">{{ item.read_count }}w阅读</span>
                     <span class="time">{{ item.public_time }}</span>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="titleBar">
                     <p class="artiTitle">{{ item.title }}</p>
                     <div class="info">
-                        <span class="read">{{ item.read_count }}阅读</span>
+                        <span class="read">{{ item.read_count }}w阅读</span>
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
@@ -131,6 +131,18 @@ export default {
             background-size: rem(18) auto;
         }
     }
+    .swiperList {
+        .head-swiper{
+            .swiperSlide{
+                margin: rem(5) auto;
+                position: relative;
+                img{
+                    width: rem(332);
+                    height: rem(166);
+                }
+            }
+        }
+    }
     .pagination {
         padding-top: rem(22);
         padding-bottom: rem(28);
@@ -161,7 +173,7 @@ export default {
                 text-align: start;
             }
             .info{
-                width: rem(160); 
+                width: rem(190); 
                 margin-top: rem(8);
                 .hot{
                     display: inline-block;
@@ -200,8 +212,8 @@ export default {
                     text-align: start;
                 }
                 .info{
-                width: rem(130); 
-                margin-top: rem(8);
+                    width: rem(160); 
+                    margin-top: rem(8);
                     .read{
                         color: #8F8F8F;
                         font-size: rem(14);
