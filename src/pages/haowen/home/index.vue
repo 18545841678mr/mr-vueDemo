@@ -72,7 +72,7 @@ export default {
     },
     methods: {
         goDetail(id){
-            this.$router.push(`detail?id=${id}`);
+            this.$router.push(`article/${id}`);
         },
         getList(){
             let _this = this;
