@@ -75,17 +75,19 @@ export default {
             this.$router.push(`detail?id=${id}`);
         },
         getList(){
+            let _this = this;
             API.getList({})
             .then(function(res) {
-                for(let i = 0; i < res.data.length; i++) {
-                    if(res.data[i].is_hot == 1 && res.data[i].is_home_show == 1){
-                        this.swiperList.push(res.data[i]);
-                    }else if(res.data[i].is_hot == 1) {
-                        this.hotList.push(res.data[i]);
-                    }else if(res.data[i].is_home_show == 1) {
-                        this.swiperList.push(res.data[i]);
+                console.log(res.data.data.data);
+                for(let i = 0; i < res.data.data.data.length; i++) {
+                    if(res.data.data.data[i].is_hot == 1 && res.data.data.data[i].is_home_show == 1){
+                        _this.swiperList.push(res.data.data.data[i]);
+                    }else if(res.data.data.data[i].is_hot == 1) {
+                        _this.hotList.push(res.data.data.data[i]);
+                    }else if(res.data.data.data[i].is_home_show == 1) {
+                        _this.swiperList.push(res.data.data.data[i]);
                     }else {
-                        this.artiList.push(res.data[i]);
+                        _this.artiList.push(res.data.data.data[i]);
                     }
                 }
             })
