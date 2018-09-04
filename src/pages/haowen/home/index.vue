@@ -7,13 +7,11 @@
         <div class="swiperList">
             <div class="head-swiper">
                 <swiper :options="swiperOption" ref="mySwiper">
-                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key" @click="goDetail(item.id)">
-                        <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" >
+                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key">
+                        <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
+                        <div class="swiperTitle">{{ item.title }}</div>
                     </swiper-slide>
                 </swiper>
-            </div>
-            <div class="pagination">
-                <span v-for="(v,i) in swiperList.imgList" :key="i" :class="{'active': activeIndex == i}"></span>
             </div>
         </div>
         <div class="hotList">
@@ -60,11 +58,7 @@ export default {
                 noSwiping : true,
                 autoplay: 6000,
                 speed: 800,
-                onTransitionStart: swiper => {
-                    this.activeIndex = swiper.activeIndex;
-                },
             },
-            activeIndex: 0
         }
     },
     components: {
@@ -73,6 +67,7 @@ export default {
     },
     methods: {
         goDetail(id){
+            console.log(id);
             this.$router.push(`article/${id}`);
         },
         getList(){
@@ -137,9 +132,24 @@ export default {
             .swiperSlide{
                 margin: rem(5) auto;
                 position: relative;
+                width: 100%;
                 img{
                     width: rem(332);
                     height: rem(166);
+                }
+                .swiperTitle{
+                    position: absolute;
+                    width: rem(332);
+                    height: rem(30);
+                    line-height: rem(30);
+                    bottom: rem(3.5);
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: rem(17);
+                    font-weight: 600;
+                    color: #fff;
+                    background-color: rgba(0, 0, 0, .4);
+                    text-align: justify;
                 }
             }
         }
