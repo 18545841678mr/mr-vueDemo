@@ -7,7 +7,7 @@
                     {{article.title}}
                 </h2>
                 <div class="ext-info">
-                    <img :src='host + article.picture' alt="">
+                    <img src="~@/assets/haowen/WechatIMG15.png" alt="">
                     <div class="read-num">{{article.read_count}}w阅读</div>
                     <div class="date">{{article.public_time}}</div>
                 </div>
@@ -76,6 +76,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../common/style/rem.scss';
 .article {
+    font-family: Microsoft YaHei;
     padding: rem(10) rem(20);
     article {
         header {
@@ -84,12 +85,14 @@ export default {
                 padding: rem(10) 0;
                 font-size: 22px;
                 text-align: left;
+                color: #000000;
             }
             .ext-info {
                 display: flex;
                 justify-content: flex-start;
                 line-height: rem(32);
                 font-size: 14px;
+                color: #8F8F8F;
                 img {
                     width: rem(30);
                     height: rem(30);
@@ -102,7 +105,7 @@ export default {
             }
         }
         section{
-            margin: rem(10) 0;
+            margin: rem(14) 0;
             img {
                 width: 100%;
             }
@@ -110,11 +113,11 @@ export default {
                 font-size: 14px;
             }
             p {
-                font-size: 16px;
+                margin:rem(6) 0;
+                font-size: rem(16);
                 word-break: break-all;
                 text-align: justify;
-                text-indent: 2em;
-                color: #999999;
+                color: #000000;
             }
         }
         .end-line {

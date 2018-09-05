@@ -9,7 +9,7 @@
                 <swiper :options="swiperOption" ref="mySwiper">
                     <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key">
                         <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
-                        <div class="swiperTitle">{{ item.title }}</div>
+                        <div class="swiperTitle">&nbsp;{{ item.title }}</div>
                     </swiper-slide>
                 </swiper>
             </div>
@@ -17,7 +17,7 @@
         <div class="hotList">
             <div class="hot-art" v-for="(item, index) in hotList" :key="index" @click="goDetail(item.id)">
                 <p class="hotTitle">{{ item.title }}</p>
-                <div class="info">
+                <div class="info" >
                     <span class="hot">热</span>
                     <span class="read">{{ item.read_count }}w阅读</span>
                     <span class="time">{{ item.public_time }}</span>
@@ -27,7 +27,7 @@
         <div class="articleList">
             <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="goDetail(item.id)">
                 <div class="titleBar">
-                    <p class="artiTitle">{{ item.title }}</p>
+                    <p :class="item.picture ? 'artiTitle' : 'hotTitle'">{{ item.title }}</p>
                     <div class="info">
                         <span class="read">{{ item.read_count }}w阅读</span>
                         <span class="time">{{ item.public_time }}</span>
@@ -56,8 +56,11 @@ export default {
                 // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，　　　　　　　假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
                 notNextTick: true,
                 noSwiping : true,
-                autoplay: 6000,
-                speed: 800,
+                autoplay: true,
+                loop: true,
+                pagination: {
+                    el: '.mySwiper'
+                }
             },
         }
     },
@@ -104,6 +107,7 @@ export default {
 @import '../../../style/normalize.scss';
 
 .haowen {
+    font-family: Microsoft YaHei;
     color: #000;
     .title{
         position: relative;
@@ -146,10 +150,9 @@ export default {
                     left: 50%;
                     transform: translateX(-50%);
                     font-size: rem(17);
-                    font-weight: 600;
+                    text-align: start;
                     color: #fff;
                     background-color: rgba(0, 0, 0, .4);
-                    text-align: justify;
                 }
             }
         }
@@ -172,27 +175,26 @@ export default {
             }
         }
     }
+    .hotTitle{
+        font-size: rem(20);
+        text-align: start;
+    }
     .hotList{
         padding: rem(15);
         .hot-art {
-            margin-top: rem(20);
+            margin-top: rem(10);
             padding-bottom: rem(10);
             border-bottom: 1px solid #F0F0F0;
-            .hotTitle{
-                font-size: rem(20);
-                font-weight: 500;
-                text-align: start;
-            }
             .info{
-                width: rem(190); 
+                width: rem(205); 
                 margin-top: rem(8);
                 .hot{
                     display: inline-block;
                     border: 1px solid red;
-                    font-size: rem(15);
-                    width: rem(24);
-                    height: rem(24);
-                    line-height: rem(24);
+                    font-size: rem(10);
+                    width: rem(15);
+                    height: rem(15);
+                    line-height: rem(15);
                     color: red;
                 }
                 .read{
@@ -212,19 +214,20 @@ export default {
     .articleList{
         padding: 0 rem(15);
         .artiList{
-            margin-top: rem(20);
+            margin-top: rem(10);
             padding-bottom: rem(10);
             border-bottom: 1px solid #F0F0F0;
             display: flex;
             justify-content: space-between;
             .titleBar{
+                width: rem(240);
                 .artiTitle{
                     font-size: rem(16);
                     font-weight: 400;
                     text-align: start;
                 }
                 .info{
-                    width: rem(160); 
+                    width: rem(175); 
                     margin-top: rem(8);
                     .read{
                         color: #8F8F8F;
