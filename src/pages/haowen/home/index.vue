@@ -9,7 +9,7 @@
                 <swiper :options="swiperOption" ref="mySwiper">
                     <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key">
                         <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
-                        <div class="swiperTitle">&nbsp;{{ item.title }}</div>
+                        <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span>{{activeIndex + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
                     </swiper-slide>
                 </swiper>
             </div>
@@ -60,8 +60,13 @@ export default {
                 loop: true,
                 pagination: {
                     el: '.mySwiper'
-                }
+                },
+                onTransitionStart: swiper => {
+                    this.activeIndex = swiper.activeIndex;
+                },
             },
+                activeIndex: 0,
+
         }
     },
     components: {
@@ -93,6 +98,9 @@ export default {
             .catch(function(err) {
                 console.log(err);
             })
+            if(_this.swiperList.length > 3) {
+                _this.swiperList.length = 3;
+            }
         }
     },
     mounted(){
@@ -138,21 +146,21 @@ export default {
                 position: relative;
                 width: 100%;
                 img{
-                    width: rem(332);
-                    height: rem(166);
+                    width: 100%;
+                    height: 50vw;
                 }
                 .swiperTitle{
                     position: absolute;
-                    width: rem(332);
+                    width: 100%;
                     height: rem(30);
                     line-height: rem(30);
                     bottom: rem(3.5);
-                    left: 50%;
-                    transform: translateX(-50%);
-                    font-size: rem(17);
+                    font-size: rem(18);
                     text-align: start;
                     color: #fff;
                     background-color: rgba(0, 0, 0, .4);
+                    display: flex;
+                    justify-content: space-between;
                 }
             }
         }
@@ -176,7 +184,7 @@ export default {
         }
     }
     .hotTitle{
-        font-size: rem(20);
+        font-size: rem(19);
         text-align: start;
     }
     .hotList{
@@ -214,13 +222,14 @@ export default {
     .articleList{
         padding: 0 rem(15);
         .artiList{
-            margin-top: rem(10);
+            margin-top: rem(5);
             padding-bottom: rem(10);
             border-bottom: 1px solid #F0F0F0;
             display: flex;
             justify-content: space-between;
             .titleBar{
                 width: rem(240);
+                padding-top: rem(15);
                 .artiTitle{
                     font-size: rem(16);
                     font-weight: 400;
@@ -228,7 +237,7 @@ export default {
                 }
                 .info{
                     width: rem(175); 
-                    margin-top: rem(8);
+                    margin-top: rem(10);
                     .read{
                         color: #8F8F8F;
                         font-size: rem(14);
