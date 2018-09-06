@@ -57,7 +57,6 @@ export default {
                 notNextTick: true,
                 noSwiping : true,
                 autoplay: true,
-                loop: true,
                 pagination: {
                     el: '.mySwiper'
                 },
