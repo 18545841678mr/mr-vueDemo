@@ -222,7 +222,7 @@ export default {
         padding: 0 rem(15);
         .artiList{
             margin-top: rem(5);
-            padding-bottom: rem(10);
+            padding-bottom: rem(5);
             border-bottom: 1px solid #F0F0F0;
             display: flex;
             justify-content: space-between;
@@ -236,7 +236,7 @@ export default {
                 }
                 .info{
                     width: rem(175); 
-                    margin-top: rem(10);
+                    margin-top: rem(15);
                     .read{
                         color: #8F8F8F;
                         font-size: rem(14);
