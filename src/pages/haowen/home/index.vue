@@ -188,7 +188,7 @@ export default {
         text-align: start;
     }
     .hotList{
-        padding: rem(15);
+        padding: rem(0) rem(15);
         .hot-art {
             margin-top: rem(10);
             padding-bottom: rem(10);

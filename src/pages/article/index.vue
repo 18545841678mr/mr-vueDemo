@@ -12,13 +12,13 @@
                     <div class="date">{{article.public_time}}</div>
                 </div>
             </header>
-            <section v-for='(elem, index) in articleList' :key='index' v-if='(index == 0) || showAll'>
+            <section v-for='(elem, index) in articleList' :key='index'>
                 <img :src="host + elem.image" alt="">
-                <p v-if="elem.desc && index == 0" >{{showAll ? firstPara.desc : showContent}}</p>
-                <p v-else-if="elem.desc" >{{elem.desc}}11111</p>
+                <!-- <p v-if="elem.desc && index == 0" >{{showAll ? firstPara.desc : showContent}}</p> -->
+                <p>{{elem.desc}}</p>
             </section>
-            <div v-if="!showAll && (firstPara.desc && (firstPara.desc.length  > 200 || article.article_info.length > 1))" @click="slide" class="show-al-btn">展开全部内容</div>
-            <div v-if="showAll" class="end-line">- the end -</div>
+            <!-- <div v-if="!showAll && (firstPara.desc && (firstPara.desc.length  > 200 || article.article_info.length > 1))" @click="slide" class="show-al-btn">展开全部内容</div> -->
+            <div class="end-line">- the end -</div>
         </article>
     </div>
 </template>
