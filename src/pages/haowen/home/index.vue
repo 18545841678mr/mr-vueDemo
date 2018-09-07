@@ -33,8 +33,8 @@
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
-                <div class="pic">
-                    <img v-if="item.picture" :src="('http://47.105.82.246:8888' + item.picture)" alt="">
+                <div class="pic" v-if="item.picture">
+                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
                 </div>
             </div>
         </div>
@@ -227,9 +227,13 @@ export default {
             border-bottom: 1px solid #F0F0F0;
             display: flex;
             justify-content: space-between;
+            align-items: stretch;
+            padding: rem(15) 0;
             .titleBar{
                 width: rem(240);
-                padding-top: rem(15);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
                 .artiTitle{
                     font-size: rem(16);
                     font-weight: 400;
@@ -251,9 +255,11 @@ export default {
                 }
             }
             .pic{
+                width: rem(120);
+                height: rem(80);
                 img{
-                    width: rem(120);
-                    height: rem(80);
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
