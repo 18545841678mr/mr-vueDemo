@@ -7,7 +7,7 @@
         <div class="swiperList">
             <div class="head-swiper">
                 <swiper :options="swiperOption" ref="mySwiper">
-                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key">
+                    <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key" v-on:load="swiperChange(item.title, key)">
                         <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
                         <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span>{{key + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
                     </swiper-slide>
@@ -60,12 +60,13 @@ export default {
                 pagination: {
                     el: '.mySwiper'
                 },
-                onTransitionStart: swiper => {
+                onAutoplay: swiper => {
                     this.activeIndex = swiper.activeIndex;
                 },
             },
-                activeIndex: 0,
-
+            activeIndex: 0,
+            swipTitle: '',
+            index: 0
         }
     },
     components: {
@@ -76,6 +77,10 @@ export default {
         goDetail(id){
             console.log(id);
             this.$router.push(`article/${id}`);
+        },
+        swiperChange(title, num) {
+            this.swipTitle = title;
+            this.index = num;
         },
         getList(){
             let _this = this;
@@ -93,13 +98,13 @@ export default {
                         _this.artiList.push(res.data.data.data[i]);
                     }
                 }
+                if(_this.swiperList.length > 3) {
+                _this.swiperList.length = 3;
+            }
             })
             .catch(function(err) {
                 console.log(err);
             })
-            if(_this.swiperList.length > 3) {
-                _this.swiperList.length = 3;
-            }
         }
     },
     mounted(){
@@ -124,7 +129,7 @@ export default {
         height: rem(50);
         line-height: rem(50);
         font-size: rem(25);
-        color: orange;
+        color: #FF6A6A;
         font-weight: 900; 
         background-color: #fff;
         &::after {
@@ -202,7 +207,7 @@ export default {
                     font-size: rem(10);
                     width: rem(15);
                     height: rem(15);
-                    line-height: rem(15);
+                    line-height: rem(13);
                     color: red;
                 }
                 .read{
