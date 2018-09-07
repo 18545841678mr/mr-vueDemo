@@ -9,7 +9,7 @@
                 <swiper :options="swiperOption" ref="mySwiper">
                     <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key">
                         <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
-                        <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span>{{activeIndex + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
+                        <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span>{{key + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
                     </swiper-slide>
                 </swiper>
             </div>
@@ -27,14 +27,14 @@
         <div class="articleList">
             <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="goDetail(item.id)">
                 <div class="titleBar">
-                    <p :class="item.picture ? 'artiTitle' : 'hotTitle'">{{ item.title }}</p>
+                    <p :class="item.picture ? 'artiTitle' : 'hotTitle'" >{{ item.title }}</p>
                     <div class="info">
                         <span class="read">{{ item.read_count }}w阅读</span>
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
                 <div class="pic">
-                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
+                    <img v-if="item.picture" :src="('http://47.105.82.246:8888' + item.picture)" alt="">
                 </div>
             </div>
         </div>
@@ -118,24 +118,24 @@ export default {
     color: #000;
     .title{
         position: relative;
-        padding-left: rem(5);
+        padding-left: rem(10);
         margin-left: rem(15);
-        width: rem(100);
+        width: rem(150);
         height: rem(50);
         line-height: rem(50);
-        font-size: rem(15);
+        font-size: rem(25);
         color: orange;
         font-weight: 900; 
         background-color: #fff;
         &::after {
             content: '';
             position: absolute;
-            top: rem(-2);
+            top: rem(-1);
             left: 0;
-            width: rem(18);
+            width: rem(25);
             height: 100%;
             background: url(../../../assets/haowen/WechatIMG15.png) no-repeat left center;
-            background-size: rem(18) auto;
+            background-size: rem(25) auto;
         }
     }
     .swiperList {
@@ -195,6 +195,7 @@ export default {
             .info{
                 width: rem(205); 
                 margin-top: rem(8);
+                text-align: left;
                 .hot{
                     display: inline-block;
                     border: 1px solid red;
@@ -237,6 +238,7 @@ export default {
                 .info{
                     width: rem(175); 
                     margin-top: rem(15);
+                    text-align: left;
                     .read{
                         color: #8F8F8F;
                         font-size: rem(14);
