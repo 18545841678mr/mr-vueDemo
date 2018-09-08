@@ -7,12 +7,12 @@
                     {{article.title}}
                 </h2>
                 <div class="ext-info">
-                    <img src="~@/assets/haowen/WechatIMG15.png" alt="">
+                    <router-link to="/"><img src="~@/assets/haowen/WechatIMG15.png" alt=""></router-link>
                     <div class="read-num">{{article.read_count}}w阅读</div>
                     <div class="date">{{article.public_time}}</div>
                 </div>
             </header>
-            <section v-for='(elem, index) in articleList' :key='index'>
+            <section v-for='(elem, index) in articleList' :key='index' v-if="elem.image || elem.desc">
                 <img :src="host + elem.image" alt="">
                 <!-- <p v-if="elem.desc && index == 0" >{{showAll ? firstPara.desc : showContent}}</p> -->
                 <p>{{elem.desc}}</p>
@@ -115,6 +115,7 @@ export default {
             p {
                 margin:rem(6) 0;
                 font-size: rem(16);
+                line-height: rem(36);
                 word-break: break-all;
                 text-align: justify;
                 color: #000000;
