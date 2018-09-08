@@ -1,6 +1,8 @@
 <template>
     <div class="haowen">
-        <div class="title">好文在线</div>
+        <div class="title">
+            <img src="~@/assets/haowen/logo.png" alt="">
+        </div>
         <div class="search">
 
         </div>
@@ -18,7 +20,6 @@
             <div class="hot-art" v-for="(item, index) in hotList" :key="index" @click="goDetail(item.id)">
                 <p class="hotTitle">{{ item.title }}</p>
                 <div class="info" >
-                    <span class="hot">热</span>
                     <span class="read">{{ item.read_count }}w阅读</span>
                     <span class="time">{{ item.public_time }}</span>
                 </div>
@@ -27,7 +28,7 @@
         <div class="articleList">
             <div class="artiList" v-for="(item, index) in artiList" :key="index" @click="goDetail(item.id)">
                 <div class="titleBar">
-                    <p :class="item.picture ? 'artiTitle' : 'hotTitle'" >{{ item.title }}</p>
+                    <p class="artiTitle" >{{ item.title }}</p>
                     <div class="info">
                         <span class="read">{{ item.read_count }}w阅读</span>
                         <span class="time">{{ item.public_time }}</span>
@@ -122,25 +123,12 @@ export default {
     font-family: Microsoft YaHei;
     color: #000;
     .title{
-        position: relative;
-        padding-left: rem(10);
-        margin-left: rem(15);
+        margin-left: rem(10);
         width: rem(150);
         height: rem(50);
-        line-height: rem(50);
-        font-size: rem(25);
-        color: #FF6A6A;
-        font-weight: 900; 
         background-color: #fff;
-        &::after {
-            content: '';
-            position: absolute;
-            top: rem(-1);
-            left: 0;
-            width: rem(25);
-            height: 100%;
-            background: url(../../../assets/haowen/WechatIMG15.png) no-repeat left center;
-            background-size: rem(25) auto;
+        img{
+            height: rem(50);
         }
     }
     .swiperList {
@@ -201,6 +189,8 @@ export default {
                 width: rem(205); 
                 margin-top: rem(8);
                 text-align: left;
+                padding-left: rem(15);
+                position: relative;
                 .hot{
                     display: inline-block;
                     border: 1px solid red;
@@ -220,7 +210,18 @@ export default {
                     font-size: rem(14);
                     margin-left: rem(10);
                 }
+                &::after{
+                    content: '';
+                    position: absolute;
+                    height: rem(15);
+                    width: rem(15);
+                    background: url('~@/assets/haowen/hot.png') no-repeat center;
+                    background-size: rem(15);
+                    top: rem(0);
+                    left: rem(0);
+                }
             }
+            
         }
         
     }
