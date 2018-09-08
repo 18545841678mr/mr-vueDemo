@@ -11,7 +11,7 @@
                 <swiper :options="swiperOption" ref="mySwiper">
                     <swiper-slide class="swiperSlide"  v-for="(item,key) in swiperList" :key="key" v-on:load="swiperChange(item.title, key)">
                         <img :src="('http://47.105.82.246:8888' + item.picture)" alt="" @click="goDetail(item.id)">
-                        <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span>{{key + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
+                        <div class="swiperTitle"><span>&nbsp;&nbsp;{{ item.title }}</span> <span class="pageIndex">{{key + 1}}/{{swiperList.length}}&nbsp;&nbsp;</span></div>
                     </swiper-slide>
                 </swiper>
             </div>
@@ -34,8 +34,8 @@
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
-                <div class="pic" v-if="item.picture">
-                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
+                <div class="pic" v-if="item.article_info[0].image">
+                    <img :src="('http://47.105.82.246:8888' + item.article_info[0].image)" alt="">
                 </div>
             </div>
         </div>
@@ -124,11 +124,11 @@ export default {
     color: #000;
     .title{
         margin-left: rem(10);
-        width: rem(150);
-        height: rem(50);
+        width: rem(100);
+        height: rem(30);
         background-color: #fff;
         img{
-            height: rem(50);
+            height: rem(30);
         }
     }
     .swiperList {
@@ -147,7 +147,7 @@ export default {
                     height: rem(30);
                     line-height: rem(30);
                     bottom: rem(3.5);
-                    font-size: rem(18);
+                    font-size: rem(17);
                     text-align: start;
                     color: #fff;
                     background-color: rgba(0, 0, 0, .4);
@@ -191,15 +191,6 @@ export default {
                 text-align: left;
                 padding-left: rem(15);
                 position: relative;
-                .hot{
-                    display: inline-block;
-                    border: 1px solid red;
-                    font-size: rem(10);
-                    width: rem(15);
-                    height: rem(15);
-                    line-height: rem(13);
-                    color: red;
-                }
                 .read{
                     margin-left: rem(8);
                     color: #8F8F8F;
@@ -217,7 +208,7 @@ export default {
                     width: rem(15);
                     background: url('~@/assets/haowen/hot.png') no-repeat center;
                     background-size: rem(15);
-                    top: rem(0);
+                    top: rem(2);
                     left: rem(0);
                 }
             }
@@ -266,6 +257,7 @@ export default {
                 img{
                     width: 100%;
                     height: 100%;
+                    border: 1px solid #F2F2F2;
                 }
             }
         }
