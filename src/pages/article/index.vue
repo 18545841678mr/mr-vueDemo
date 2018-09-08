@@ -108,6 +108,7 @@ export default {
             margin: rem(14) 0;
             img {
                 width: 100%;
+                border: solid 1px #F2F2F2;
             }
             .show-al-btn {
                 font-size: 14px;
