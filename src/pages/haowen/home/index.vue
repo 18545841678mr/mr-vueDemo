@@ -227,7 +227,7 @@ export default {
             align-items: stretch;
             padding: rem(15) 0;
             .titleBar{
-                width: rem(240);
+                // width: rem(240);
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -252,7 +252,8 @@ export default {
                 }
             }
             .pic{
-                width: rem(120);
+                min-width: rem(120);
+                max-width: rem(120);
                 height: rem(80);
                 img{
                     width: 100%;
