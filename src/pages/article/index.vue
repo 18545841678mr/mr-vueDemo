@@ -16,7 +16,7 @@
                 <img :src="host + elem.image" alt="">
                 <!-- <p v-if="elem.desc && index == 0" >{{showAll ? firstPara.desc : showContent}}</p> -->
                 <!-- <p>{{elem.desc}}</p> -->
-                <p v-html='elem.desc.replace(/##/g, "<br/><br/>")'></p>
+                <p v-if="elem.desc" v-html='elem.desc.replace(/##/g, "<br/><br/>")'></p>
             </section>
             <!-- <div v-if="!showAll && (firstPara.desc && (firstPara.desc.length  > 200 || article.article_info.length > 1))" @click="slide" class="show-al-btn">展开全部内容</div> -->
             <div class="end-line">- the end -</div>
