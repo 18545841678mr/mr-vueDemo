@@ -4,7 +4,10 @@
             <img src="~@/assets/haowen/logo.png" alt="">
         </div>
         <div class="search">
-
+            <form>
+                <input type="text" id="bdcsMain" placeholder="输入想要搜索的帖子的内容"/>
+                <button type="submit"></button>
+            </form>
         </div>
         <div class="swiperList">
             <div class="head-swiper">
@@ -129,6 +132,37 @@ export default {
         background-color: #fff;
         img{
             height: rem(30);
+        }
+    }
+    .search {
+        width: 92%;
+        margin: rem(10) auto;
+        form {
+            width: 100%;
+            height: rem(36);
+            position: relative;
+            input {
+                width: 100%;
+                height: 100%;
+                padding-left: rem(20);
+                border: none;
+                border-radius: rem(18);
+                outline: none;
+                background: #f8f8f8;
+            }
+            button {
+                width: rem(20);
+                height: rem(20);
+                position: absolute;
+                right: rem(16);
+                top: 50%;
+                transform: translateY(-50%);
+                border: none;
+                outline: none;
+                background-color: #f8f8f8;
+                background-image: url(../../../assets/haowen/icon-search.png);
+                background-size: contain;
+            }
         }
     }
     .swiperList {
