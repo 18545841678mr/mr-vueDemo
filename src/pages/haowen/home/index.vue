@@ -37,8 +37,8 @@
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
-                <div class="pic" v-if="item.article_info[0].image">
-                    <img :src="('http://47.105.82.246:8888' + item.article_info[0].image)" alt="">
+                <div class="pic">
+                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
                 </div>
             </div>
         </div>
@@ -90,16 +90,16 @@ export default {
             let _this = this;
             API.getList({})
             .then(function(res) {
-                console.log(res.data.data.data);
-                for(let i = 0; i < res.data.data.data.length; i++) {
-                    if(res.data.data.data[i].is_hot == 1 && res.data.data.data[i].is_home_show == 1){
-                        _this.swiperList.push(res.data.data.data[i]);
-                    }else if(res.data.data.data[i].is_hot == 1) {
-                        _this.hotList.push(res.data.data.data[i]);
-                    }else if(res.data.data.data[i].is_home_show == 1) {
-                        _this.swiperList.push(res.data.data.data[i]);
+                console.log(res.data.data);
+                for(let i = 0; i < res.data.data.length; i++) {
+                    if(res.data.data[i].is_hot == 1 && res.data.data[i].is_home_show == 1){
+                        _this.swiperList.push(res.data.data[i]);
+                    }else if(res.data.data[i].is_hot == 1) {
+                        _this.hotList.push(res.data.data[i]);
+                    }else if(res.data.data[i].is_home_show == 1) {
+                        _this.swiperList.push(res.data.data[i]);
                     }else {
-                        _this.artiList.push(res.data.data.data[i]);
+                        _this.artiList.push(res.data.data[i]);
                     }
                 }
                 if(_this.swiperList.length > 3) {
