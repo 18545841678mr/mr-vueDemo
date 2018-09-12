@@ -37,8 +37,8 @@
                         <span class="time">{{ item.public_time }}</span>
                     </div>
                 </div>
-                <div class="pic" v-if="item.picture">
-                    <img :src="('http://47.105.82.246:8888' + item.picture)" alt="">
+                <div class="pic" v-if="item.image">
+                    <img :src="('http://47.105.82.246:8888' + item.image)" alt="">
                 </div>
             </div>
         </div>
