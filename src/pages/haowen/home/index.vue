@@ -150,7 +150,6 @@ export default {
     },
     mounted(){
         this.getList();
-        this.loadScript();
     }
 }
 </script>
