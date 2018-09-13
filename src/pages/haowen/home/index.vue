@@ -142,7 +142,7 @@ export default {
                 var script = document.createElement("script"); 
                 script.type = "text/javascript";
                 script.charset = "utf-8";
-                script.src = "http://zhannei.baidu.com/api/customsearch/apiaccept?sid=17880686206649260375&v=2.0&callback=init";
+                script.src = "http://zhannei.baidu.com/api/customsearch/apiaccept?sid=10535645184203972917&v=2.0&callback=init";
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(script, s);
             }
