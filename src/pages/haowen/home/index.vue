@@ -5,8 +5,8 @@
         </div>
         <div class="search">
             <form>
-                <input type="text" id="bdcsMain" placeholder="输入想要搜索的帖子的内容"/>
-                <button type="submit" @click="search"></button>
+                <input type="text" id="bdcsMain" v-model="keywords" placeholder="输入想要搜索的帖子的内容"/>
+                <button type="submit"></button>
             </form>
         </div>
         <div class="swiperList">
@@ -70,7 +70,8 @@ export default {
             },
             activeIndex: 0,
             swipTitle: '',
-            index: 0
+            index: 0,
+            keywords: '',
         }
     },
     components: {
@@ -110,46 +111,16 @@ export default {
                 console.log(err);
             })
         },
-        //处理结果回调函数示例
-        // display(data) {
-        //     console.log(data);
-        // },
-        // //初始化回调函数示例
-        // init() {
-        //     cse = new BCse.Search("17880686206649260375");    //参数为您的API引擎ID，已自动填写，必需。
-        //     cse.getResult("关键词", this.display);  //此方法获取搜索结果，参数1为搜索词，参数2为您获取到结果后想要执行的回调函数。
-        // },
-        // loadScript() { 
-        //     var script = document.createElement("script"); 
-        //     script.type = "text/javascript";
-        //     script.charset = "utf-8";
-        //     script.src = "http://zhannei.baidu.com/api/customsearch/apiaccept?sid=17880686206649260375&v=2.0&callback=init";
-        //     var s = document.getElementsByTagName('script')[0];
-        //     s.parentNode.insertBefore(script, s);
-        // }
-        search() {
-            let cse;
-            //处理结果回调函数示例
-            function display (data) {
-                console.log(data);
-            }
-            //初始化回调函数示例
-            function init () {
-                cse = new BCse.Search("17880686206649260375");    //参数为您的API引擎ID，已自动填写，必需。   
-                cse.getResult("关键词", display);    //此方法获取搜索结果，参数1为搜索词，参数2为您获取到结果后想要执行的回调函数。
-            }
-            function loadScript () { 
-                var script = document.createElement("script"); 
-                script.type = "text/javascript";
-                script.charset = "utf-8";
-                script.src = "http://zhannei.baidu.com/api/customsearch/apiaccept?sid=17880686206649260375&v=2.0&callback=init";
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(script, s);
-            }
+        loadResult() {
+            let cse = new BCse.Search("17880686206649260375");
+            cse.getResult(this.keywords, res => {
+                console.log(res);
+            })
         }
     },
     mounted(){
         this.getList();
+        this.loadResult();
     }
 }
 </script>
