@@ -5,7 +5,7 @@
         </div>
         <div class="search">
             <form>
-                <input type="text" id="bdcsMain" v-model="keywords" placeholder="输入想要搜索的帖子的内容"/>
+                <input type="text" id="17880686206649260375" v-model="keywords" placeholder="输入想要搜索的帖子的内容"/>
                 <button type="submit"></button>
             </form>
         </div>
