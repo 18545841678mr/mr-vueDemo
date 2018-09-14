@@ -4,9 +4,11 @@
             <img src="~@/assets/haowen/logo.png" alt="">
         </div>
         <div class="search">
-            <form>
-                <input type="text" id="17880686206649260375" v-model="keywords" placeholder="输入想要搜索的帖子的内容"/>
-                <button type="submit"></button>
+            <form target="_blank" action="http://zhannei.baidu.com/cse/site">
+                <input type="text" name="q"  placeholder="输入想要搜索的帖子的内容"/>
+                <input type="hidden" name="cc" value="www.haowenzaixian.com">
+                <input type="submit" class="button" value="搜索">
+                <!-- <button id="17880686206649260375" type="submit"></button> -->
             </form>
         </div>
         <div class="swiperList">
@@ -158,7 +160,7 @@ export default {
                 outline: none;
                 background: #f8f8f8;
             }
-            button {
+            .button {
                 width: rem(20);
                 height: rem(20);
                 position: absolute;
